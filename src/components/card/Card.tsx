@@ -38,6 +38,8 @@ export default class Card extends React.Component<Props, {}> {
     }
 
     private handleRedirect = () => {
-        store.dispatch(push(`recipe-${this.props.id}`))
+        if (document.documentElement.clientWidth < 768) {
+            store.dispatch(push(`recipe-${this.props.id}`))
+        }
     }
 }

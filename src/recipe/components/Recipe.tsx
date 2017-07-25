@@ -19,15 +19,15 @@ export default class Recipe extends React.Component<any, {}> {
 
         return (
             <Content>
-                <div className="pb-30">
+                <div className="pt-30 pb-30">
                     <div className="row">
                         {images.length == 1 &&
-                        <div className={cx('img')}>
-                            <img src={images[0]} alt="" />
-                        </div>
+                            <div className={cx('img')}>
+                                <img src={images[0]} alt="" />
+                            </div>
                         }
                         {images.length > 1 &&
-                        <Carousel images={images} />
+                            <Carousel images={images} />
                         }
                     </div>
                     <div className={cx('cuisine')}>{cuisine.title}</div>
