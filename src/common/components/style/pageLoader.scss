@@ -1,0 +1,43 @@
+@import "~common/style/common/variables";
+
+.circle {
+  size: 80px;
+  border-radius: 50%;
+  position: absolute;
+  top: calc(50% - 40px);
+  left: calc(50% - 40px);
+  animation-name: circle-scale;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate-reverse;
+  animation-iteration-count: infinite;
+  transform: scale(0);
+  opacity: 0.6;
+}
+
+.circle-1 {
+  background-color: lighten($primary, 30);
+}
+
+.circle-2 {
+  animation-delay: -250ms;
+  background-color: lighten($primary, 20);
+}
+
+.circle-3 {
+  animation-delay: -500ms;
+  background-color: lighten($primary, 10);
+}
+
+.circle-4 {
+  animation-delay: -750ms;
+  background-color: $primary;
+}
+
+:global {
+  @keyframes circle-scale {
+    to {
+      transform: scale(1);
+    }
+  }
+}
