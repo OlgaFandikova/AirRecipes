@@ -37,10 +37,13 @@ export default class FilterPanel extends React.Component<Props, {}> {
                 <div className={cx('overlay', {'visible': isShowFilter})} onClick={hideFilter} />
                 <div className={cx('filter', {'active': isShowFilter})}>
                     <div className={cx('head')}>
+                        <button className={cx('button-close')} onClick={hideFilter} />
                         <button className={cx('button-clear')} onClick={clearFilter}>Clear All</button>
-                        <MuiThemeProvider>
-                            <RaisedButton label="See recipes" onClick={setFilter} {...buttonStyle} />
-                        </MuiThemeProvider>
+                        <div className={cx('button-set-filter')}>
+                            <MuiThemeProvider>
+                                <RaisedButton label="See recipes" onClick={setFilter} {...buttonStyle} />
+                            </MuiThemeProvider>
+                        </div>
                     </div>
                     <div className={cx('body')}>
                         <CheckList options={cuisines} onCheck={checkCuisine} />
@@ -52,6 +55,11 @@ export default class FilterPanel extends React.Component<Props, {}> {
                                onChange={changeCookingTime}>
                             <TimeFormat seconds={cookingTime.min} /> - <TimeFormat seconds={cookingTime.max} />
                         </Range>
+                    </div>
+                    <div className={cx('footer')}>
+                        <MuiThemeProvider>
+                            <RaisedButton label="See recipes" onClick={setFilter} {...buttonStyle} className={cx('button-set-filter')} />
+                        </MuiThemeProvider>
                     </div>
                 </div>
             </div>

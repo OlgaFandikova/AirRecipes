@@ -45,6 +45,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  .button-set-filter {
+    display: none;
+    @include from-screen-size(md) {
+      display: block;
+    }
+  }
 }
 
 .button-clear {
@@ -55,6 +61,32 @@
   border: none;
 }
 
+.button-close {
+  display: block;
+  size: 12px;
+  background: url("../img/icon-close.svg") no-repeat center;
+  background-size: contain;
+  border: none;
+  @include from-screen-size(md) {
+    display: none;
+  }
+}
+
 .body {
   padding: 16px;
+}
+
+.footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  padding: 0 16px 10px;
+  @include from-screen-size(md) {
+    display: none;
+  }
+  .button-set-filter {
+    width: 100%;
+  }
 }
