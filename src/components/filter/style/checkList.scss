@@ -1,0 +1,42 @@
+.head {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #d8d8d8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+
+.icon-arrow {
+  size: 10px 6px;
+  display: block;
+  background: url("../img/icon-arrow.svg") no-repeat center;
+  background-size: contain;
+  transition: .3s transform;
+  &.down {
+    transform: rotate(180deg);
+  }
+}
+
+.collapse {
+  margin: 0 -16px;
+}
+
+.list {
+  padding: 13px 16px 0;
+}
+
+.checkbox {
+  margin-left: -5px;
+  text-transform: capitalize;
+  padding-bottom: 20px;
+  &:last-of-type {
+    padding-bottom: 9px;
+  }
+  svg {
+    size: 18px 16px !important;
+    margin: 4px 0 0 3px;
+  }
+}

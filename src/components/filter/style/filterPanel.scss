@@ -1,0 +1,60 @@
+@import "~common/style/common/variables";
+@import "~common/style/common/mixins";
+
+.overlay {
+  position: fixed 0;
+  z-index: 400;
+  background-color: rgba(255,255,255,.63);
+  opacity: 0;
+  visibility: hidden;
+  transition: .3s opacity, .3s visibility;
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.filter {
+  position: fixed 0;
+  overflow: auto;
+  z-index: 500;
+  background: $white;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-40px);
+  transition: .3s all;
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  @include from-screen-size(md) {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    left: auto;
+    bottom: auto;
+    width: 490px;
+  }
+}
+
+.head {
+  padding: 10px 16px 8px;
+  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.13), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button-clear {
+  font-size: 16px;
+  letter-spacing: 0;
+  color: $primary;
+  background: transparent;
+  border: none;
+}
+
+.body {
+  padding: 16px;
+}

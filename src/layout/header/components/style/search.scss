@@ -1,0 +1,72 @@
+@import "~common/style/common/variables";
+@import "~common/style/common/mixins";
+
+.text-field {
+  @include from-screen-size(sm) {
+    margin-top: -35px;
+  }
+}
+
+.icon-search {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 8px;
+  size: 20px;
+  background: url("../img/icon-search.svg") no-repeat center;
+  background-size: 100%;
+  @include from-screen-size(sm) {
+    margin: 0 7.5px 13px 0;
+    vertical-align: bottom;
+  }
+}
+
+.input {
+  display: none;
+  @include from-screen-size(sm) {
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+
+.mobile-search {
+  display: flex;
+  align-items: center;
+  background-color: $white;
+  height: 62px;
+  padding: 0 16px;
+  position: absolute;
+  top: -16px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  transition: .2s all;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-100%);
+  @include from-screen-size(sm) {
+    display: none;
+  }
+  &.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+.icon-close {
+  display: block;
+  size: 12px;
+  margin-right: 21px;
+  background: url("../img/icon-close.svg") no-repeat center;
+  background-size: 100%;
+}
+
+.mobile-input {
+  flex: 1;
+  outline: none;
+  border: none;
+  margin-top: -2px;
+  @include placeholder {
+    color: rgba(117, 117, 117, 0.67);
+  }
+}

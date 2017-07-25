@@ -14,15 +14,19 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jsx$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader'
-                },
-            }, {
                 test: /\.tsx?$/,
                 loader: 'babel-loader!ts-loader?typescriptCompiler=jsx-typescript',
                 exclude: [/node_modules/]
+            }, {
+                test: /\.css/,
+                use: [{
+                    loader: 'style-loader'
+                }, {
+                    loader: 'css-loader',
+                    options: {
+                        minimize: true
+                    }
+                }]
             }, {
                 test: /\.scss$/,
                 use: [{
@@ -33,6 +37,7 @@ module.exports = {
                         sourceMap: true,
                         importLoaders: 3,
                         modules: true,
+                        minimize: true,
                         localIdentName: '[name]--[local]--[hash:base64:5]'
                     }
                 }, {
@@ -51,11 +56,12 @@ module.exports = {
                     loader: 'sass-loader'
                 }]
             }, {
-                test: /\.jpg$/,use: {
+                test: /\.(png|jpg|svg|eot|woff|ttf|gif)$/,
+                use: {
                     loader: 'url-loader',
                     options: {
                         limit: 10000,
-                        mimetype: 'image/jpg&name=img/[name].[ext]'
+                        name: 'img/[name].[ext]'
                     }
                 }
             }

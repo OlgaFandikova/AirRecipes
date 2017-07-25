@@ -1,0 +1,70 @@
+@import "~common/style/common/variables";
+@import "~common/style/common/mixins";
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 300;
+}
+
+.container {
+  padding: 16px 0;
+  position: relative;
+  overflow: hidden;
+  height: 198px;
+  z-index: 100;
+  &:after {
+    content: '';
+    position: absolute 0;
+    z-index: 2;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0), #212121);
+    opacity: .7;
+  }
+  :global(.row) {
+    position: relative;
+    z-index: 5;
+  }
+}
+
+.bg-img {
+  position: absolute 0;
+  z-index: 1;
+  height: 198px;
+  background: url("../img/bg-header.jpg") no-repeat center;
+  background-size: cover;
+}
+
+.bg-orange {
+  position: absolute 0;
+  z-index: 4;
+  background: $primary;
+  opacity: 0;
+}
+
+.hidden-block {
+  height: 198px;
+}
+
+.logo {
+  font-size: 28px;
+  font-family: $font-rubik;
+  font-weight: 500;
+  color: $white;
+  line-height: 33px;
+  text-decoration: none;
+}
+
+.title {
+  position: relative;
+  z-index: 3;
+  font-size: 33px;
+  font-weight: 300;
+  color: $white;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  margin: 48px 0 30px;
+  @include from-screen-size(md) {
+    font-size: 45px;
+  }
+}

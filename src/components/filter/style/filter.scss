@@ -1,0 +1,55 @@
+@import "~common/style/common/variables";
+@import "~common/style/common/mixins";
+
+.wrap {
+  position: relative;
+}
+
+.block {
+  position: absolute;
+  right: 15px;
+  bottom: -20px;
+  z-index: 200;
+  @include from-screen-size(md) {
+    bottom: -36px;
+    right: 0;
+  }
+}
+
+.button {
+  size: 40px !important;
+  line-height: 40px !important;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 17px 0 rgba(0, 0, 0, 0.2) !important;
+  transform-origin: right;
+  background-color: $primary !important;
+  @include from-screen-size(md) {
+    size: 72px !important;
+    line-height: 72px !important;
+  }
+  @include max-width(map-get($screen-sizes, md)) {
+    transform: scale(1) !important;
+  }
+  > button {
+    size: 40px !important;
+    background-color: $primary !important;
+    @include from-screen-size(md) {
+      size: 72px !important;
+    }
+    > div {
+      size: 40px !important;
+      @include from-screen-size(md) {
+        size: 72px !important;
+      }
+    }
+  }
+}
+
+.icon {
+  display: inline-block;
+  background: url("../img/icon-filter.svg") no-repeat center;
+  size: 15px !important;
+  background-size: contain;
+  @include from-screen-size(md) {
+    size: 23px 15px !important;
+  }
+}

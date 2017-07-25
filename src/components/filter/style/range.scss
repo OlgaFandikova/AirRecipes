@@ -1,0 +1,42 @@
+@import "~common/style/common/variables";
+
+.wrap {
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: 0;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.values {
+  color: #808080;
+  margin-bottom: 8px;
+}
+
+:global {
+  .input-range__label--max, .input-range__label--min {
+    display: none;
+  }
+  .input-range__slider {
+    size: 25px;
+    background-color: $white;
+    border: 1px solid $primary;
+    margin-top: -12.5px;
+    margin-left: -12.5px;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.13), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  }
+  .input-range__track {
+    height: 3px;
+    background-color: #bfbfbf;
+    &--active {
+      background-color: $primary;
+    }
+  }
+  .input-range__label--value {
+    display: none;
+  }
+}

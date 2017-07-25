@@ -1,0 +1,71 @@
+@import "~common/style/common/variables";
+@import "~common/style/common/mixins";
+
+.slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  @include from-screen-size(md) {
+    height: 551px;
+  }
+  :global {
+    .slick-slide {
+      position: relative;
+      @include from-screen-size(md) {
+        height: 551px;
+      }
+      &:before {
+        content: '';
+        position: absolute 0;
+        z-index: 1;
+        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000000);
+        opacity: .4;
+      }
+    }
+    .slick-arrow {
+      size: 35px;
+      background: url("../img/icon-arrow.svg") no-repeat center;
+      background-size: contain;
+      z-index: 10;
+      &:before {
+        display: none;
+      }
+    }
+    .slick-prev {
+      left: 55px;
+      transform: scale(-1, 1);
+    }
+    .slick-next {
+      right: 55px;
+    }
+    .slick-dots {
+      position: absolute;
+      z-index: 2;
+      left: 0;
+      right: 0;
+      bottom: 46px;
+      height: 8px;
+      line-height: 8px;
+      > li {
+        size: 6px;
+        margin: 0 4.5px;
+        display: inline-block;
+        vertical-align: middle;
+        > button {
+          padding: 0;
+          size: 6px;
+          border-radius: 50%;
+          opacity: 0.7;
+          background-color: $white;
+          &:before {
+            display: none;
+          }
+        }
+        &.slick-active > button {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+}
