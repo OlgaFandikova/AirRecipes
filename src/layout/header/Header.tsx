@@ -4,20 +4,20 @@ import {Link} from 'react-router-dom'
 
 const classNames = require('classnames/bind')
 
-import {setFilterButtonScale} from 'actions/filterActions'
+import {setFilterButtonScale, setSearchFocusStyle} from 'actions/filterActions'
 import Filter from 'containers/FilterContainer'
-import Search from './components/Search'
+import Search from './containers/SearchContainer'
 
 const cx = classNames.bind(require('./style/header.scss'))
 
 
 interface Props {
     setFilterButtonScale: (scale: number) => void
+    setSearchFocusStyle: (style: string) => void
 }
 
 interface State {
     headerHeight: number
-    inputFocusStyle: string
     overlayOpacity: number
 }
 
@@ -25,7 +25,6 @@ class Header extends React.Component<Props, State> {
 
     state = {
         headerHeight: 198,
-        inputFocusStyle: 'primary',
         overlayOpacity: 0
     }
 
@@ -38,7 +37,7 @@ class Header extends React.Component<Props, State> {
     }
 
     render() {
-        const {headerHeight, inputFocusStyle, overlayOpacity} = this.state
+        const {headerHeight, overlayOpacity} = this.state
 
         return (
             <div className={cx('wrap')} style={{paddingBottom: headerHeight + 'px'}}>
@@ -52,7 +51,7 @@ class Header extends React.Component<Props, State> {
                                     <Link to="/" className={cx('logo')}>AirRecipes</Link>
                                 </div>
                                 <div className="column flex justify-content-end">
-                                    <Search focusStyle={inputFocusStyle} />
+                                    <Search />
                                 </div>
                             </div>
                             <h3 className={cx('title')}>Find the best recipes!</h3>
@@ -71,12 +70,12 @@ class Header extends React.Component<Props, State> {
 
         this.setState({...this.state,
             headerHeight: window.pageYOffset > offsetTop ? minHeight : initialHeight,
-            inputFocusStyle: window.pageYOffset > offsetTop ? 'white' : 'primary',
             overlayOpacity: window.pageYOffset > offsetTop ? 1 : 0
         })
 
         this.props.setFilterButtonScale(window.pageYOffset > offsetTop ? 0.6 : 1)
+        this.props.setSearchFocusStyle(window.pageYOffset > offsetTop ? 'white' : 'primary')
     }
 }
 
-export default connect(null, {setFilterButtonScale})(Header)
+export default connect(null, {setFilterButtonScale, setSearchFocusStyle})(Header)

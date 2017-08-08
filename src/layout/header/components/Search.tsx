@@ -11,48 +11,32 @@ const cx = classNames.bind(require('./style/search.scss'))
 
 interface Props {
     focusStyle: string
-}
-
-interface State {
     isShowMobileSearchForm: boolean
+    searchChange: (event: {target: {value: string}}) => void
+    showMobileSearchForm: () => void
+    hideMobileSearchForm: () => void
 }
 
-export default class Search extends React.Component<Props, State> {
-
-    state = {
-        isShowMobileSearchForm: false
-    }
+export default class Search extends React.Component<Props, {}> {
 
     render() {
-        const {isShowMobileSearchForm} = this.state
+        const {isShowMobileSearchForm, showMobileSearchForm, hideMobileSearchForm, searchChange} = this.props
         const focusStyles = (textFieldFocusStyles as any)[this.props.focusStyle]
 
         return (
             <div className={cx('text-field')}>
-                <i className={cx('icon-search')} onClick={this.showMobileSearchForm} />
+                <i className={cx('icon-search')} onClick={showMobileSearchForm} />
                 <div className={cx('input')}>
                     <MuiThemeProvider>
-                        <TextField id="search" floatingLabelText="Search" {...textFieldStyles} {...focusStyles} />
+                        <TextField id="search" floatingLabelText="Search" onChange={searchChange} {...textFieldStyles} {...focusStyles} />
                     </MuiThemeProvider>
                 </div>
                 <div className={cx('mobile-search', {'open': isShowMobileSearchForm})}>
-                    <i className={cx('icon-close')} onClick={this.hideMobileSearchForm} />
-                    <input type="text" placeholder="Search" className={cx('mobile-input')} />
+                    <i className={cx('icon-close')} onClick={hideMobileSearchForm} />
+                    <input type="text" placeholder="Search" className={cx('mobile-input')} onChange={searchChange} />
                 </div>
             </div>
         )
-    }
-
-    private showMobileSearchForm = () => {
-        this.setState({...this.state,
-            isShowMobileSearchForm: true
-        })
-    }
-
-    private hideMobileSearchForm = () => {
-        this.setState({...this.state,
-            isShowMobileSearchForm: false
-        })
     }
 }
 

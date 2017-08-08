@@ -7,7 +7,9 @@ import {
     HIDE_FILTER,
     SET_FILTER_BUTTON_SCALE,
     RESET_FILTER,
-    FilterButtonScalePayload
+    FilterButtonScalePayload,
+    SET_SEARCH_FOCUS_STYLE,
+    SearchFocusStylePayload
 } from '../actions/filterActions'
 
 
@@ -16,13 +18,15 @@ export interface FilterState {
     isSetFilter: boolean
     filterButtonScale: number
     filteredRecipesList: Recipe[]
+    searchFocusStyle: string
 }
 
 const initialState = <FilterState>{
     isShowFilter: false,
     isSetFilter: false,
     filterButtonScale: 1,
-    filteredRecipesList: [] as Recipe[]
+    filteredRecipesList: [] as Recipe[],
+    searchFocusStyle: 'primary'
 }
 
 function handleSetFilteredRecipes(state: FilterState, action: Action<SetAllRecipesPayload>) {
@@ -57,13 +61,20 @@ function handleResetFilter(state: FilterState) {
     }
 }
 
+function handleSetSearchFocusStyle(state: FilterState, action: Action<SearchFocusStylePayload>) {
+    return {...state,
+        searchFocusStyle: action.payload.style
+    }
+}
+
 export default handleActions<FilterState>(
     {
         [SET_FILTERED_RECIPES]: handleSetFilteredRecipes,
         [SHOW_FILTER]: handleShowFilter,
         [HIDE_FILTER]: handleHideFilter,
         [SET_FILTER_BUTTON_SCALE]: handleSetFilterButtonScale,
-        [RESET_FILTER]: handleResetFilter
+        [RESET_FILTER]: handleResetFilter,
+        [SET_SEARCH_FOCUS_STYLE]: handleSetSearchFocusStyle
     },
     initialState
 )

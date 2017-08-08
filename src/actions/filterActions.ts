@@ -46,3 +46,16 @@ export function resetFilter() {
         type: RESET_FILTER
     }
 }
+
+export const SET_SEARCH_FOCUS_STYLE = 'SET_SEARCH_FOCUS_STYLE'
+
+export interface SearchFocusStylePayload {
+    style: string
+}
+
+export function setSearchFocusStyle(style: string) {
+    return {
+        type: SET_SEARCH_FOCUS_STYLE,
+        payload: {style}
+    }
+}

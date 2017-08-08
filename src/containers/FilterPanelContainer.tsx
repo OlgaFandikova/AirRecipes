@@ -1,6 +1,8 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
+import {push} from 'react-router-redux'
 
+import {store} from 'store'
 import {Recipe} from 'actions/recipesActions'
 import {setFilteredRecipes, hideFilter, resetFilter} from 'actions/filterActions'
 import FilterPanel from 'components/filter/FilterPanel'
@@ -116,6 +118,7 @@ class FilterPanelContainer extends React.Component<Props, State> {
 
         hideFilter()
         setFilteredRecipes(filteredRecipes)
+        store.dispatch(push('/'))
     }
 }
 
