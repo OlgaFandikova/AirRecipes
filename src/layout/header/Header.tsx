@@ -41,7 +41,7 @@ class Header extends React.Component<Props, State> {
         const {headerHeight, inputFocusStyle, overlayOpacity} = this.state
 
         return (
-            <div>
+            <div className={cx('wrap')} style={{paddingBottom: headerHeight + 'px'}}>
                 <header className={cx('header')}>
                     <div className={cx('container')} style={{height: headerHeight + 'px'}}>
                         <div className={cx('bg-img')} />
@@ -60,7 +60,6 @@ class Header extends React.Component<Props, State> {
                     </div>
                     <Filter />
                 </header>
-                <div className={cx('hidden-block')} style={{height: headerHeight + 'px'}} />
             </div>
         )
     }

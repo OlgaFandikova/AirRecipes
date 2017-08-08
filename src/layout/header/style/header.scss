@@ -3,6 +3,10 @@
 
 $header-animation-transition: .3s;
 
+.wrap {
+  transition: $header-animation-transition padding-bottom;
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -15,7 +19,6 @@ $header-animation-transition: .3s;
   padding: 16px 0;
   position: relative;
   overflow: hidden;
-  height: 198px;
   z-index: 100;
   transition: $header-animation-transition height;
   &:after {
@@ -45,11 +48,6 @@ $header-animation-transition: .3s;
   background: $primary;
   opacity: 0;
   transition: $header-animation-transition opacity;
-}
-
-.hidden-block {
-  height: 198px;
-  transition: $header-animation-transition height;
 }
 
 .logo {

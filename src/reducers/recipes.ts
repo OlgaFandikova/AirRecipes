@@ -8,7 +8,7 @@ export interface RecipesState {
 }
 
 const initialState = <RecipesState>{
-    recipesList: []
+    recipesList: [] as Recipe[]
 }
 
 function handleSetAllRecipes(state: RecipesState, action: Action<SetAllRecipesPayload>) {

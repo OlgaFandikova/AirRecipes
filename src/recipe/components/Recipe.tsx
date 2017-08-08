@@ -10,9 +10,7 @@ import Carousel from './Carousel'
 const cx = classNames.bind(require('./style/recipe.scss'))
 
 
-interface Props extends RecipeInterface {}
-
-export default class Recipe extends React.Component<any, {}> {
+export default class Recipe extends React.Component<RecipeInterface, {}> {
 
     render() {
         const {images, cuisine, title, difficulty, caloricity, ingredients, instructions, cookTime} = this.props

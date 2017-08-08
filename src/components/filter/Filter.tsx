@@ -10,11 +10,11 @@ const cx = classNames.bind(require('./style/filter.scss'))
 
 
 interface Props {
-    filterButtonScale?: number
-    showFilter?: () => void
+    filterButtonScale: number
+    showFilter: () => void
 }
 
-export default class Filter extends React.Component<any, {}> {
+export default class Filter extends React.Component<Props, {}> {
 
     render() {
         const {filterButtonScale, showFilter} = this.props

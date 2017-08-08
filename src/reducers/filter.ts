@@ -22,7 +22,7 @@ const initialState = <FilterState>{
     isShowFilter: false,
     isSetFilter: false,
     filterButtonScale: 1,
-    filteredRecipesList: []
+    filteredRecipesList: [] as Recipe[]
 }
 
 function handleSetFilteredRecipes(state: FilterState, action: Action<SetAllRecipesPayload>) {

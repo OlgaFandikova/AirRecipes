@@ -10,12 +10,13 @@ import Card from '../components/card/Card'
 
 
 interface Props {
-    recipes?: Recipe[]
-    filteredRecipes?: Recipe[]
-    setAllRecipes?: (recipes: Recipe[]) => void
+    isSetFilter: boolean
+    recipes: Recipe[]
+    filteredRecipes: Recipe[]
+    setAllRecipes: (recipes: Recipe[]) => void
 }
 
-class RecipesListContainer extends React.Component<any, {}> {
+class RecipesListContainer extends React.Component<Props, {}> {
 
     componentWillMount() {
         axios.get('https://test.space-o.ru/list.json').then((response) => {

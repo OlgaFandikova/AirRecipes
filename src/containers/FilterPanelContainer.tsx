@@ -27,12 +27,12 @@ export interface State {
 }
 
 interface Props {
+    recipes: Recipe[]
+    filteredRecipes: Recipe[]
     isShowFilter: boolean
-    recipesList?: Recipe[]
-    filteredRecipesList?: Recipe[]
-    setFilteredRecipes?: (recipes: Recipe[]) => void
-    hideFilter?: () => void
-    resetFilter?: () => void
+    setFilteredRecipes: (recipes: Recipe[]) => void
+    hideFilter: () => void
+    resetFilter: () => void
 }
 
 const initialFilterState = {
@@ -53,9 +53,9 @@ const initialFilterState = {
     }
 }
 
-class FilterPanelContainer extends React.Component<any, State> {
+class FilterPanelContainer extends React.Component<Props, State> {
 
-    state = initialFilterState
+    state = {...initialFilterState}
 
     render() {
         return (

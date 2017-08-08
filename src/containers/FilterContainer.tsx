@@ -7,11 +7,11 @@ import Filter from 'components/filter/Filter'
 
 
 interface Props {
-    filterButtonScale?: number
-    showFilter?: () => void
+    filterButtonScale: number
+    showFilter: () => void
 }
 
-class FilterContainer extends React.Component<any, {}> {
+class FilterContainer extends React.Component<Props, {}> {
 
     render() {
         const {filterButtonScale, showFilter} = this.props

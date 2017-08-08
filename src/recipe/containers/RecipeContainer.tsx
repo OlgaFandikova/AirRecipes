@@ -6,22 +6,20 @@ import Recipe from '../components/Recipe'
 
 
 export interface RecipeInterface {
-    recipe?: {
-        caloricity: number
-        cookTime: number
-        cuisine: {
-            id: number
-            title: string
-        }
-        description: string
-        difficulty: string
+    caloricity: number
+    cookTime: number
+    cuisine: {
         id: number
-        images: Array<string>
-        ingredients: Array<string>
-        instructions: Array<string>
-        thumbnail: string
         title: string
     }
+    description: string
+    difficulty: string
+    id: number
+    images: string[]
+    ingredients: string[]
+    instructions: string[]
+    thumbnail: string
+    title: string
 }
 
 interface Props {
@@ -32,7 +30,9 @@ interface Props {
     }
 }
 
-interface State extends RecipeInterface {}
+interface State {
+    recipe: RecipeInterface
+}
 
 export default class RecipeContainer extends React.Component<Props, State> {
 
@@ -47,9 +47,9 @@ export default class RecipeContainer extends React.Component<Props, State> {
             description: '',
             difficulty: '',
             id: 1,
-            images: [''],
-            ingredients: [''],
-            instructions: [''],
+            images: [] as string[],
+            ingredients: [] as string[],
+            instructions: [] as string[],
             thumbnail: '',
             title: ''
         }
