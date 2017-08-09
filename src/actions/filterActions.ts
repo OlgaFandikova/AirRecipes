@@ -59,3 +59,28 @@ export function setSearchFocusStyle(style: string) {
         payload: {style}
     }
 }
+
+export const SET_CALORIES_RANGE = 'SET_CALORIES_RANGE'
+
+export interface CaloriesRangePayload {
+    values: {
+        min: number
+        max: number
+    }
+}
+
+export function setCaloriesRange(values: {min: number, max: number}) {
+    return {
+        type: SET_CALORIES_RANGE,
+        payload: {values}
+    }
+}
+
+export const CHANGE_CALORIES = 'CHANGE_CALORIES'
+
+export function changeCalories(values: {min: number, max: number}) {
+    return {
+        type: CHANGE_CALORIES,
+        payload: {values}
+    }
+}

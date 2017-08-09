@@ -9,9 +9,17 @@ import {
     RESET_FILTER,
     FilterButtonScalePayload,
     SET_SEARCH_FOCUS_STYLE,
-    SearchFocusStylePayload
+    SearchFocusStylePayload,
+    SET_CALORIES_RANGE,
+    CaloriesRangePayload,
+    CHANGE_CALORIES
 } from '../actions/filterActions'
 
+
+export interface RangeValues {
+    min: number
+    max: number
+}
 
 export interface FilterState {
     isShowFilter: boolean
@@ -19,6 +27,8 @@ export interface FilterState {
     filterButtonScale: number
     filteredRecipesList: Recipe[]
     searchFocusStyle: string
+    calories: RangeValues
+    caloriesRange: RangeValues
 }
 
 const initialState = <FilterState>{
@@ -26,7 +36,15 @@ const initialState = <FilterState>{
     isSetFilter: false,
     filterButtonScale: 1,
     filteredRecipesList: [] as Recipe[],
-    searchFocusStyle: 'primary'
+    searchFocusStyle: 'primary',
+    calories: {
+        min: 0,
+        max: 3000
+    },
+    caloriesRange: {
+        min: 0,
+        max: 3000
+    }
 }
 
 function handleSetFilteredRecipes(state: FilterState, action: Action<SetAllRecipesPayload>) {
@@ -56,6 +74,7 @@ function handleSetFilterButtonScale(state: FilterState, action: Action<FilterBut
 
 function handleResetFilter(state: FilterState) {
     return {...state,
+        calories: state.caloriesRange,
         isShowFilter: false,
         isSetFilter: false
     }
@@ -67,6 +86,19 @@ function handleSetSearchFocusStyle(state: FilterState, action: Action<SearchFocu
     }
 }
 
+function handleSetCaloriesRange(state: FilterState, action: Action<CaloriesRangePayload>) {
+    return {...state,
+        calories: action.payload.values,
+        caloriesRange: action.payload.values
+    }
+}
+
+function handleSetCalories(state: FilterState, action: Action<CaloriesRangePayload>) {
+    return {...state,
+        calories: action.payload.values
+    }
+}
+
 export default handleActions<FilterState>(
     {
         [SET_FILTERED_RECIPES]: handleSetFilteredRecipes,
@@ -74,7 +106,9 @@ export default handleActions<FilterState>(
         [HIDE_FILTER]: handleHideFilter,
         [SET_FILTER_BUTTON_SCALE]: handleSetFilterButtonScale,
         [RESET_FILTER]: handleResetFilter,
-        [SET_SEARCH_FOCUS_STYLE]: handleSetSearchFocusStyle
+        [SET_SEARCH_FOCUS_STYLE]: handleSetSearchFocusStyle,
+        [SET_CALORIES_RANGE]: handleSetCaloriesRange,
+        [CHANGE_CALORIES]: handleSetCalories
     },
     initialState
 )

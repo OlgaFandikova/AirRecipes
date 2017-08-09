@@ -4,7 +4,7 @@ import {push} from 'react-router-redux'
 
 import {store} from 'store'
 import {Recipe} from 'actions/recipesActions'
-import {setFilteredRecipes, hideFilter, resetFilter} from 'actions/filterActions'
+import {setFilteredRecipes, hideFilter, resetFilter, changeCalories} from 'actions/filterActions'
 import FilterPanel from 'components/filter/FilterPanel'
 import {State as WebState} from 'reducers'
 
@@ -24,17 +24,19 @@ export interface RangeValues {
 
 export interface State {
     cuisines: Cuisines
-    calories: RangeValues
     cookingTime: RangeValues
 }
 
 interface Props {
+    calories: RangeValues
     recipes: Recipe[]
     filteredRecipes: Recipe[]
     isShowFilter: boolean
-    setFilteredRecipes: (recipes: Recipe[]) => void
+    caloriesRange: RangeValues
     hideFilter: () => void
     resetFilter: () => void
+    setFilteredRecipes: (recipes: Recipe[]) => void
+    changeCalories: (values: {min: number, max: number}) => void
 }
 
 const initialFilterState = {
@@ -44,10 +46,6 @@ const initialFilterState = {
         french: false,
         greek: false,
         indian: false,
-    },
-    calories: {
-        min: 0,
-        max: 3000
     },
     cookingTime: {
         min: 120,
@@ -67,7 +65,6 @@ class FilterPanelContainer extends React.Component<Props, State> {
                 setFilter={this.handleSetFilter}
                 clearFilter={this.handleClearFilter}
                 checkCuisine={this.handleCheckCuisine}
-                changeCalories={this.handleChangeCalories}
                 changeCookingTime={this.handleChangeCookingTime}
             />
         )
@@ -81,15 +78,9 @@ class FilterPanelContainer extends React.Component<Props, State> {
         })
     }
 
-    private handleChangeCalories = (values: {min: number, max: number}) => {
-        this.setState({...this.state,
-            calories: values
-        })
-    }
-
     private handleChangeCookingTime = (values: {min: number, max: number}) => {
         this.setState({...this.state,
-            cookingTime: values
+            cookingTime: {...this.state.cookingTime, ...values}
         })
     }
 
@@ -99,8 +90,8 @@ class FilterPanelContainer extends React.Component<Props, State> {
     }
 
     private handleSetFilter = () => {
-        const {recipes, setFilteredRecipes, hideFilter} = this.props
-        const {cuisines, calories} = this.state
+        const {recipes, setFilteredRecipes, hideFilter, calories} = this.props
+        const {cuisines} = this.state
         let checkedCuisinesLength = 0
 
         Object.keys(cuisines).map((cuisine: string) => {
@@ -124,8 +115,10 @@ class FilterPanelContainer extends React.Component<Props, State> {
 
 export default connect((state: WebState) => {
     return {
+        calories: state.filter.calories,
         recipes: state.recipes.recipesList,
         isShowFilter: state.filter.isShowFilter,
-        filteredRecipes: state.filter.filteredRecipesList
+        filteredRecipes: state.filter.filteredRecipesList,
+        caloriesRange: state.filter.caloriesRange
     }
-}, {setFilteredRecipes, hideFilter, resetFilter})(FilterPanelContainer)
+}, {setFilteredRecipes, hideFilter, resetFilter, changeCalories})(FilterPanelContainer)

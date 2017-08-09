@@ -5,6 +5,7 @@ import axios from 'axios'
 
 import {State} from 'reducers'
 import {setAllRecipes, Recipe} from 'actions/recipesActions'
+import {setCaloriesRange} from 'actions/filterActions'
 import Content from 'layout/Content'
 import Card from '../components/card/Card'
 
@@ -14,13 +15,30 @@ interface Props {
     recipes: Recipe[]
     filteredRecipes: Recipe[]
     setAllRecipes: (recipes: Recipe[]) => void
+    setCaloriesRange: (values: {min: number, max: number}) => void
 }
 
 class RecipesListContainer extends React.Component<Props, {}> {
 
     componentWillMount() {
         axios.get('https://test.space-o.ru/list.json').then((response) => {
-            this.props.setAllRecipes(response.data.recipes)
+            const recipes = [...response.data.recipes]
+            let caloriesRange = {
+                min: recipes[0].caloricity,
+                max: recipes[0].caloricity
+            }
+
+            recipes.map((recipe: Recipe) => {
+                if (recipe.caloricity < caloriesRange.min) {
+                    caloriesRange.min = recipe.caloricity
+                }
+                if (recipe.caloricity > caloriesRange.max) {
+                    caloriesRange.max = recipe.caloricity
+                }
+            })
+
+            this.props.setAllRecipes(recipes)
+            this.props.setCaloriesRange(caloriesRange)
         })
     }
 
@@ -51,4 +69,4 @@ export default connect((state: State) => {
         recipes: state.recipes.recipesList,
         filteredRecipes: state.filter.filteredRecipesList
     }
-}, {setAllRecipes})(RecipesListContainer)
+}, {setAllRecipes, setCaloriesRange})(RecipesListContainer)

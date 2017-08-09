@@ -18,6 +18,7 @@ interface Props {
     cuisines: Cuisines
     calories: RangeValues
     cookingTime: RangeValues
+    caloriesRange: RangeValues
     hideFilter: () => void
     setFilter: () => void
     clearFilter: () => void
@@ -30,7 +31,7 @@ export default class FilterPanel extends React.Component<Props, {}> {
 
     render() {
         const {isShowFilter, hideFilter, setFilter, cuisines, calories, cookingTime, checkCuisine, changeCalories,
-               changeCookingTime, clearFilter} = this.props
+               changeCookingTime, clearFilter, caloriesRange} = this.props
 
         return (
             <div>
@@ -47,12 +48,12 @@ export default class FilterPanel extends React.Component<Props, {}> {
                     </div>
                     <div className={cx('body')}>
                         <CheckList options={cuisines} onCheck={checkCuisine} />
-                        <Range title="Calories Range" maxValue={3000} minValue={0} values={calories} step={10}
-                               onChange={changeCalories}>
+                        <Range step={10} title="Calories Range" maxValue={caloriesRange.max} minValue={caloriesRange.min}
+                               values={calories} onChange={changeCalories}>
                             {calories.min} kCal - {calories.max} kCal
                         </Range>
-                        <Range title="Cooking Time" maxValue={9000} minValue={120} values={cookingTime} step={60}
-                               onChange={changeCookingTime}>
+                        <Range step={60} title="Cooking Time" maxValue={9000} minValue={120}
+                               values={cookingTime} onChange={changeCookingTime}>
                             <TimeFormat seconds={cookingTime.min} /> - <TimeFormat seconds={cookingTime.max} />
                         </Range>
                     </div>
