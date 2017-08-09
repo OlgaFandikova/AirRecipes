@@ -3,6 +3,8 @@ import * as React from 'react'
 import PageLoader from 'common/components/PageLoader'
 import Header from './header/Header'
 
+import './style/layout.scss'
+
 
 export default class Layout extends React.Component<{}, {}> {
 
