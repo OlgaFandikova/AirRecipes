@@ -1,7 +1,9 @@
 import * as React from 'react'
+import {connect} from 'react-redux'
 
 import axios from 'axios'
 
+import {showPageLoader, hidePageLoader} from 'common/actions/pageLoaderActions'
 import Recipe from '../components/Recipe'
 
 
@@ -28,13 +30,15 @@ interface Props {
             id: number
         }
     }
+    showPageLoader: () => void
+    hidePageLoader: () => void
 }
 
 interface State {
     recipe: RecipeInterface
 }
 
-export default class RecipeContainer extends React.Component<Props, State> {
+class RecipeContainer extends React.Component<Props, State> {
 
     state = {
         recipe: {
@@ -56,10 +60,13 @@ export default class RecipeContainer extends React.Component<Props, State> {
     }
 
     componentWillMount() {
+        this.props.showPageLoader()
+
         axios.get(`https://test.space-o.ru/detail_${this.props.match.params.id}.json`).then((response) => {
             this.setState({...this.state,
                 recipe: response.data.receipt
             })
+            this.props.hidePageLoader()
         })
     }
 
@@ -69,3 +76,5 @@ export default class RecipeContainer extends React.Component<Props, State> {
         )
     }
 }
+
+export default connect(null, {showPageLoader, hidePageLoader})(RecipeContainer)

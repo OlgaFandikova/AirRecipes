@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import PageLoader from 'common/components/PageLoader'
+import PageLoader from 'common/containers/PageLoaderContainer'
 import Header from './header/Header'
 
 import './style/layout.scss'

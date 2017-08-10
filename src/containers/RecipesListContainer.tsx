@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import axios from 'axios'
 
 import {State} from 'reducers'
+import {showPageLoader} from 'common/actions/pageLoaderActions'
 import {setAllRecipes, Recipe} from 'actions/recipesActions'
 import {setCaloriesRange} from 'actions/filterActions'
 import Content from 'layout/Content'
@@ -14,6 +15,7 @@ interface Props {
     isSetFilter: boolean
     recipes: Recipe[]
     filteredRecipes: Recipe[]
+    showPageLoader: () => void
     setAllRecipes: (recipes: Recipe[]) => void
     setCaloriesRange: (values: {min: number, max: number}) => void
 }
@@ -21,7 +23,7 @@ interface Props {
 class RecipesListContainer extends React.Component<Props, {}> {
 
     componentWillMount() {
-        axios.get('https://test.space-o.ru/list.json').then((response) => {
+       axios.get('https://test.space-o.ru/list.json').then((response) => {
             const recipes = [...response.data.recipes]
             let caloriesRange = {
                 min: recipes[0].caloricity,
@@ -43,7 +45,7 @@ class RecipesListContainer extends React.Component<Props, {}> {
     }
 
     render() {
-        const {recipes, filteredRecipes, isSetFilter} = this.props
+        const {recipes, filteredRecipes, isSetFilter, showPageLoader} = this.props
         const recipesList = isSetFilter ? filteredRecipes : recipes
 
         return (
@@ -54,7 +56,7 @@ class RecipesListContainer extends React.Component<Props, {}> {
                     }
                     {recipesList.map((recipe: Recipe, index: number) => (
                         <div key={index} className="column lg-4 md-6">
-                            <Card {...recipe} />
+                            <Card {...recipe} showPageLoader={showPageLoader} />
                         </div>
                     ))}
                 </div>
@@ -69,4 +71,4 @@ export default connect((state: State) => {
         recipes: state.recipes.recipesList,
         filteredRecipes: state.filter.filteredRecipesList
     }
-}, {setAllRecipes, setCaloriesRange})(RecipesListContainer)
+}, {setAllRecipes, setCaloriesRange, showPageLoader})(RecipesListContainer)

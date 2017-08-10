@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --hot --watch --debug --color --devtool eval-source-map --output-pathinfo --inline --progress --content-base public --history-api-fallback --port 8888 --host 0.0.0.0"
+    "start": "webpack-dev-server --hot --watch --debug --color --devtool eval-source-map --output-pathinfo --inline --progress --content-base public --history-api-fallback --port 8282 --host 0.0.0.0"
   },
   "repository": {
     "type": "git",

@@ -10,7 +10,9 @@ import {store} from 'store'
 const cx = classNames.bind(require('./style/card.scss'))
 
 
-interface Props extends Recipe {}
+interface Props extends Recipe {
+    showPageLoader: () => void
+}
 
 export default class Card extends React.Component<Props, {}> {
 
@@ -29,9 +31,9 @@ export default class Card extends React.Component<Props, {}> {
                     <p className={cx('description')}>{description}</p>
                 </div>
                 <div className={cx('footer')}>
-                    <Link to={`recipe-${id}`} className={cx('button')}>
+                    <span className={cx('button')} onClick={this.handleShowRecipeDetails}>
                         Read More<i className={cx('arrow')} />
-                    </Link>
+                    </span>
                 </div>
             </div>
         )
@@ -39,7 +41,12 @@ export default class Card extends React.Component<Props, {}> {
 
     private handleRedirect = () => {
         if (document.documentElement.clientWidth < 768) {
-            store.dispatch(push(`recipe-${this.props.id}`))
+            this.handleShowRecipeDetails()
         }
+    }
+
+    private handleShowRecipeDetails = () => {
+        this.props.showPageLoader()
+        store.dispatch(push(`recipe-${this.props.id}`))
     }
 }
