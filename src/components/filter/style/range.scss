@@ -34,6 +34,7 @@
     height: 3px;
     background-color: #bfbfbf;
     border-radius: 0;
+    transition: left .1s ease-out,width .1s ease-out;
     &--active {
       background-color: $primary;
     }
@@ -60,5 +61,9 @@
   }
   .input-range__label--value {
     display: none;
+  }
+
+  .input-range__slider-container {
+    transition: left .1s ease-out;
   }
 }
