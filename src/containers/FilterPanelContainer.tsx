@@ -48,8 +48,8 @@ const initialFilterState = {
         indian: false,
     },
     cookingTime: {
-        min: 120,
-        max: 9000
+        min: 2100,
+        max: 3000
     }
 }
 

@@ -18,6 +18,9 @@
   position: fixed 0;
   overflow: auto;
   z-index: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: $white;
   box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19), 0 8px 17px 0 rgba(0, 0, 0, 0.2);
   opacity: 0;
@@ -31,6 +34,7 @@
   }
   @include from-screen-size(md) {
     position: absolute;
+    display: block;
     top: calc(100% + 10px);
     right: 0;
     left: auto;
@@ -73,14 +77,13 @@
 }
 
 .body {
-  padding: 16px;
+  padding: 16px 16px 0;
+  @include from-screen-size(md) {
+    padding-bottom: 16px;
+  }
 }
 
 .footer {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
   display: block;
   padding: 0 16px 10px;
   @include from-screen-size(md) {

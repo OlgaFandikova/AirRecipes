@@ -37,25 +37,27 @@ export default class FilterPanel extends React.Component<Props, {}> {
             <div>
                 <div className={cx('overlay', {'visible': isShowFilter})} onClick={hideFilter} />
                 <div className={cx('filter', {'active': isShowFilter})}>
-                    <div className={cx('head')}>
-                        <button className={cx('button-close')} onClick={hideFilter} />
-                        <button className={cx('button-clear')} onClick={clearFilter}>Clear All</button>
-                        <div className={cx('button-set-filter')}>
-                            <MuiThemeProvider>
-                                <RaisedButton label="See recipes" onClick={setFilter} {...buttonStyle} />
-                            </MuiThemeProvider>
+                    <div>
+                        <div className={cx('head')}>
+                            <button className={cx('button-close')} onClick={hideFilter} />
+                            <button className={cx('button-clear')} onClick={clearFilter}>Clear All</button>
+                            <div className={cx('button-set-filter')}>
+                                <MuiThemeProvider>
+                                    <RaisedButton label="See recipes" onClick={setFilter} {...buttonStyle} />
+                                </MuiThemeProvider>
+                            </div>
                         </div>
-                    </div>
-                    <div className={cx('body')}>
-                        <CheckList options={cuisines} onCheck={checkCuisine} />
-                        <Range step={10} title="Calories Range" maxValue={caloriesRange.max} minValue={caloriesRange.min}
-                               values={calories} onChange={changeCalories}>
-                            {calories.min} kCal - {calories.max} kCal
-                        </Range>
-                        <Range step={60} title="Cooking Time" maxValue={9000} minValue={120}
-                               values={cookingTime} onChange={changeCookingTime}>
-                            <TimeFormat seconds={cookingTime.min} /> - <TimeFormat seconds={cookingTime.max} />
-                        </Range>
+                        <div className={cx('body')}>
+                            <CheckList options={cuisines} onCheck={checkCuisine} />
+                            <Range step={10} title="Calories Range" maxValue={caloriesRange.max} minValue={caloriesRange.min}
+                                   values={calories} onChange={changeCalories}>
+                                {calories.min} kCal - {calories.max} kCal
+                            </Range>
+                            <Range step={60} title="Cooking Time" maxValue={3000} minValue={2100}
+                                   values={cookingTime} onChange={changeCookingTime}>
+                                <TimeFormat seconds={cookingTime.min} /> - <TimeFormat seconds={cookingTime.max} />
+                            </Range>
+                        </div>
                     </div>
                     <div className={cx('footer')}>
                         <MuiThemeProvider>
